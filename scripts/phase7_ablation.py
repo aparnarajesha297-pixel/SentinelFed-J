@@ -75,6 +75,8 @@ def main() -> None:
     ap.add_argument("--results", default="results")
     ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2, 3, 4])
     ap.add_argument("--all-features", action="store_true", help="skip the protocol-blind mask")
+    ap.add_argument("--resume", action="store_true",
+                    help="keep finished seeds from ablation_seedwise.csv and run only the rest")
     args = ap.parse_args()
     res = Path(args.results)
     t0 = time.time()
@@ -83,8 +85,17 @@ def main() -> None:
     va, te = ids["val"], ids["test"]
     n_cls = len(data.classes)
     rows = []
+    done = set()
+    if args.resume and (res / "ablation_seedwise.csv").exists():
+        prev = pd.read_csv(res / "ablation_seedwise.csv")
+        complete = prev.groupby("seed").size()
+        done = set(complete[complete == len(VARIANTS)].index) & set(args.seeds)
+        rows = prev[prev["seed"].isin(done)].to_dict("records")
+        print(f"resuming: seeds already complete {sorted(done)}")
 
     for seed in args.seeds:
+        if seed in done:
+            continue
         print(f"=== seed {seed} ({time.time() - t0:.0f}s)", flush=True)
         torch.manual_seed(seed)
         ae, _ = train_autoencoder(data.center, data.seq_idx, ids["u_train"], ids["u_val"],
