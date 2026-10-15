@@ -1,0 +1,14 @@
+attack_type,Trust,Verify,Reject
+Backdoor,11.7,1777.0,26.3
+DDoS_HTTP,0.7,88.3,1.0
+DDoS_ICMP,0.3,2602.3,14854.3
+DDoS_TCP,0.0,55.3,7457.7
+Fingerprinting,0.0,84.0,13.0
+Normal,29227.0,252.7,2.3
+Password,0.0,4052.0,4.0
+Port_Scanning,15.7,1091.3,1952.0
+Ransomware,12.0,1206.3,263.7
+SQL_injection,2.0,84.7,0.3
+Uploading,0.0,50.3,1.7
+Vulnerability_scanner,0.0,201.3,0.7
+XSS,1.7,409.7,6.7

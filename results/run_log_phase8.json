@@ -1,0 +1,11 @@
+{
+  "scores_from": "data/phase6_stress",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "ece_bins": 15,
+  "calibration": "Platt scaling fitted on S_val, evaluated on S_test",
+  "reliability_bins": "10 equal-width, bins with <20 windows omitted"
+}

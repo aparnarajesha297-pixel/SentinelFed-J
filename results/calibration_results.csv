@@ -1,0 +1,4 @@
+Model / Branch,ECE,Brier,ECE_raw,Brier_raw,Verify %,Attack % among Verify,Overall attack % (test),seeds
+Supervised branch alone,0.0008 ± 0.0003,0.0010 ± 0.0001,0.0010 ± 0.0003,0.0010 ± 0.0001,n/a,n/a,55.20,3
+Unsupervised branch alone,0.0174 ± 0.0016,0.0245 ± 0.0021,0.2263 ± 0.0023,0.1601 ± 0.0012,n/a,n/a,55.20,3
+Dual Head,0.0008 ± 0.0003,0.0010 ± 0.0001,n/a,n/a,18.1664 ± 4.9013,97.7767 ± 0.6322,55.20,3
