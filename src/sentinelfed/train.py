@@ -60,6 +60,29 @@ class LCClassifier(nn.Module):
         return self.head(self.lc(cur, prev))
 
 
+class StaticGNNClassifier(nn.Module):
+    """Static graph baseline: GINE layers over the current window's ego graph,
+    no previous-window attention, no history (CE) and no global view (GC)."""
+
+    def __init__(self, node_dim, edge_dim, hidden, n_classes):
+        super().__init__()
+        from torch_geometric.nn import GINEConv
+        self.inp = nn.Linear(node_dim, hidden)
+        mlp = lambda: nn.Sequential(nn.Linear(hidden, hidden), nn.ReLU(), nn.Linear(hidden, hidden))  # noqa: E731
+        self.conv1 = GINEConv(mlp(), edge_dim=edge_dim)
+        self.conv2 = GINEConv(mlp(), edge_dim=edge_dim)
+        self.head = nn.Linear(hidden, n_classes)
+
+    def lc(self, cur, prev=None):
+        h = torch.relu(self.inp(cur.x))
+        h = torch.relu(self.conv1(h, cur.edge_index, cur.edge_attr))
+        h = torch.relu(self.conv2(h, cur.edge_index, cur.edge_attr))
+        return h[cur.ptr[:-1]]
+
+    def forward(self, cur, prev=None):
+        return self.head(self.lc(cur))
+
+
 class SupervisedHead(nn.Module):
     """CE + GC + Weighted Fusion + classifier over stored h_L.
 
@@ -98,10 +121,11 @@ def lc_batches(windows, ids):
 
 
 def train_lc(ego, windows, y, train_ids, val_ids, n_classes, hidden=64, epochs=3,
-             batch=1024, lr=1e-3, seed=0, log=print):
+             batch=1024, lr=1e-3, seed=0, log=print, model_cls=None):
     torch.manual_seed(seed)
     rng = np.random.default_rng(seed)
-    model = LCClassifier(ego["node_feat"].shape[1], ego["edge_attr"].shape[1], hidden, n_classes)
+    model = (model_cls or LCClassifier)(ego["node_feat"].shape[1], ego["edge_attr"].shape[1],
+                                        hidden, n_classes)
     opt = torch.optim.Adam(model.parameters(), lr=lr)
     loss_fn = nn.CrossEntropyLoss(weight=class_weights(y[train_ids], n_classes))
     best, best_state = -1.0, None
@@ -117,7 +141,7 @@ def train_lc(ego, windows, y, train_ids, val_ids, n_classes, hidden=64, epochs=3
             opt.step()
         pred = predict_lc(model, ego, windows, val_ids).argmax(1)
         f1 = f1_score(y[val_ids], pred, average="macro")
-        log(f"  LC epoch {ep + 1}: val macro-F1 {f1:.4f}")
+        log(f"  {type(model).__name__} epoch {ep + 1}: val macro-F1 {f1:.4f}")
         if f1 > best:
             best, best_state = f1, {k: v.clone() for k, v in model.state_dict().items()}
     model.load_state_dict(best_state)
