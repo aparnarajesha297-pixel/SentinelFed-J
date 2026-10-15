@@ -1,0 +1,5 @@
+check,passed,evidence
+1. Earliest S_test timestamp is later than latest S_train timestamp,True,holds in 20/20 recordings (checked per recording: there is no shared calendar across recordings); train<val<test strictly in 20/20
+2. No record appears in more than one split,True,S_train&S_val=0; S_train&S_test=0; S_val&S_test=0; U_train&U_val=0; U_train&U_test=0; U_val&U_test=0; U_train&S_val=0; U_train&S_test=0; U_val&S_train=0; U_val&S_test=0; U_test&S_train=0; U_test&S_val=0. U_train is a subset of S_train by design (separate families)
+3. No scaler or encoder fit on validation or test data,True,supervised preprocessor fit on S_train only (1467484 rows); unsupervised on U_train only (1130947 rows); fitted row-id hashes stored in artifacts/*.joblib
+4. No feature built from information later than its record,True,"37 model features, all computed from the record's own packet fields. Columns that use other records (capture_id, segment_id, time_s) are identifiers for splitting only and are excluded from features"
