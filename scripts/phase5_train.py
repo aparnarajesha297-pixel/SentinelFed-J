@@ -82,7 +82,8 @@ def plot_disagreement(p_sup, d_norm, y, tau_s, tau_u, path, title):
     ax.set_yscale("log")
     ax.set_ylabel("Windows (log scale)")
     ax.set_title(title, fontsize=10, color=INK, loc="left")
-    ax.legend(frameon=False, fontsize=9)
+    ax.legend(frameon=False, fontsize=9, loc="upper center", ncol=2)
+    ax.set_ylim(top=ax.get_ylim()[1] * 8)
     style(ax)
     fig.tight_layout()
     fig.savefig(path)
@@ -90,15 +91,21 @@ def plot_disagreement(p_sup, d_norm, y, tau_s, tau_u, path, title):
 
 
 def plot_regions(p_sup, d_norm, y, tau_s, tau_u, path, title, max_points=6000, seed=0):
-    fig, ax = plt.subplots(figsize=(5.6, 5.0), dpi=150)
-    regions = [((0, tau_s), (0, tau_u), TRUST), ((tau_s, 1), (tau_u, 1), REJECT),
-               ((tau_s, 1), (0, tau_u), VERIFY), ((0, tau_s), (tau_u, 1), VERIFY)]
+    # Both scores pile up near 0 and 1, so the axes use a logit scale.
+    lo, hi = 1e-4, 1 - 1e-4
+    p_sup, d_norm = np.clip(p_sup, lo, hi), np.clip(d_norm, lo, hi)
+    fig, ax = plt.subplots(figsize=(5.8, 5.2), dpi=150)
+    ax.set_xscale("logit")
+    ax.set_yscale("logit")
+    regions = [((lo, tau_s), (lo, tau_u), TRUST), ((tau_s, hi), (tau_u, hi), REJECT),
+               ((tau_s, hi), (lo, tau_u), VERIFY), ((lo, tau_s), (tau_u, hi), VERIFY)]
     for (x0, x1), (y0, y1), name in regions:
         ax.add_patch(plt.Rectangle((x0, y0), x1 - x0, y1 - y0, color=REGION_C[name],
                                    alpha=0.12, linewidth=0))
-        if (x1 - x0) > 0.08 and (y1 - y0) > 0.06:
-            ax.text((x0 + x1) / 2, (y0 + y1) / 2, name, ha="center", va="center",
-                    fontsize=11, color=INK, alpha=0.8, fontweight="bold")
+        cx = np.exp((np.log(x0 / (1 - x0)) + np.log(x1 / (1 - x1))) / 2)
+        cy = np.exp((np.log(y0 / (1 - y0)) + np.log(y1 / (1 - y1))) / 2)
+        ax.text(cx / (1 + cx), cy / (1 + cy), name, ha="center", va="center",
+                fontsize=11, color=INK, alpha=0.8, fontweight="bold")
     rng = np.random.default_rng(seed)
     for lab, name, c in [(0, "Normal", NORMAL_C), (1, "Attack", ATTACK_C)]:
         idx = np.flatnonzero(y == lab)
@@ -107,10 +114,10 @@ def plot_regions(p_sup, d_norm, y, tau_s, tau_u, path, title, max_points=6000, s
                    edgecolors="white", label=f"{name} (sample of {len(idx):,})")
     ax.axvline(tau_s, color=MUTED, linewidth=1, linestyle="--")
     ax.axhline(tau_u, color=MUTED, linewidth=1, linestyle="--")
-    ax.set_xlim(-0.02, 1.02)
-    ax.set_ylim(-0.02, 1.02)
-    ax.set_xlabel(f"Supervised attack score (threshold {tau_s:.3f})")
-    ax.set_ylabel(f"Unsupervised distance, scaled (threshold {tau_u:.2f})")
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
+    ax.set_xlabel(f"Supervised attack score, logit scale (threshold {tau_s:.3f})")
+    ax.set_ylabel(f"Unsupervised distance percentile, logit scale (threshold {tau_u:.2f})")
     ax.set_title(title, fontsize=10, color=INK, loc="left")
     ax.legend(frameon=False, fontsize=8, loc="lower right")
     style(ax)
@@ -257,6 +264,13 @@ def main() -> None:
                   "metrics_val": metrics}
     (res / f"phase5_thresholds{args.tag}.json").write_text(json.dumps(thresholds, indent=2, default=float))
     policy.to_csv(res / f"phase5_policy_val{args.tag}.csv", index=False)
+    pd.DataFrame({"window_id": wid[va], "attack_type": windows["attack_type"].to_numpy()[va],
+                  "label": y[va], "p_supervised": p_sup[va], "d_norm": d_norm[va],
+                  "risk": risk_va, "decision": dec, "decision_no_labels": dec_nolab}
+                 ).to_csv(out / "scores_val.csv", index=False)
+    by_type = pd.crosstab(windows["attack_type"].to_numpy()[va], dec)
+    by_type.to_csv(res / f"phase5_policy_by_type_val{args.tag}.csv")
+    log(by_type.to_string())
     (res / f"phase5_train{args.tag}.log.txt").write_text("\n".join(log_lines))
     log(json.dumps(metrics, indent=2, default=float))
     log(policy.to_string(index=False))
