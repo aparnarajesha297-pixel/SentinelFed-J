@@ -12,3 +12,7 @@ supervised branch, stage B: CE + GC + fusion + classifier
   CE masked pretraining epoch 2: MSE 0.2753
   head epoch 1: val macro-F1 0.8066
   head epoch 2: val macro-F1 0.8010
+col_0           Reject  Trust  Verify
+row_0                                
+Fingerprinting      33     24      42
+Normal               0    242       6

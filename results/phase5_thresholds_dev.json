@@ -4,7 +4,7 @@
   "tau_supervised_rule": "maximises F1 of the supervised score on S_val",
   "tau_unsupervised_rule": "1% false alarms on U_val (usable at sites with no labels)",
   "seed": 0,
-  "seconds": 3.5,
+  "seconds": 3.6,
   "metrics_val": {
     "val_windows": 347,
     "val_attack_rate": 0.28530259365994237,

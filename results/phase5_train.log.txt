@@ -1,0 +1,36 @@
+windows: train 290,175, val 53,216; U_train 120,606, U_val 17,088; 13 classes
+unsupervised branch (GRU autoencoder on U_train)
+  GRU-AE epoch 1: U_val reconstruction MSE 0.0492
+  GRU-AE epoch 2: U_val reconstruction MSE 0.0375
+  GRU-AE epoch 3: U_val reconstruction MSE 0.0322
+  GRU-AE epoch 4: U_val reconstruction MSE 0.0288
+  GRU-AE epoch 5: U_val reconstruction MSE 0.0266
+  val PR-AUC (unsupervised alone) 0.9824
+supervised branch, stage A: LC
+  LC epoch 1: val macro-F1 0.9458
+  LC epoch 2: val macro-F1 0.9868
+  LC epoch 3: val macro-F1 0.9773
+supervised branch, stage B: CE + GC + fusion + classifier
+  CE masked pretraining epoch 1: MSE 3.2817
+  CE masked pretraining epoch 2: MSE 0.6333
+  head epoch 1: val macro-F1 0.9879
+  head epoch 2: val macro-F1 0.9898
+  head epoch 3: val macro-F1 0.9896
+  head epoch 4: val macro-F1 0.9865
+  head epoch 5: val macro-F1 0.9843
+  head epoch 6: val macro-F1 0.9874
+col_0                  Reject  Trust  Verify
+row_0                                       
+Backdoor                    0     14    1719
+DDoS_HTTP                   0      0      75
+DDoS_ICMP               13736      0    3664
+DDoS_TCP                    2      0    7504
+Fingerprinting              0      1      98
+Normal                      3  16908     177
+Password                    1      2    4039
+Port_Scanning               1     17    3026
+Ransomware                514     16     934
+SQL_injection               0      0      92
+Uploading                   0      0      42
+Vulnerability_scanner      76      0     133
+XSS                         4      0     418

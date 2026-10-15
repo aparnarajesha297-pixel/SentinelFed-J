@@ -1,0 +1,14 @@
+row_0,Reject,Trust,Verify
+Backdoor,0,14,1719
+DDoS_HTTP,0,0,75
+DDoS_ICMP,13736,0,3664
+DDoS_TCP,2,0,7504
+Fingerprinting,0,1,98
+Normal,3,16908,177
+Password,1,2,4039
+Port_Scanning,1,17,3026
+Ransomware,514,16,934
+SQL_injection,0,0,92
+Uploading,0,0,42
+Vulnerability_scanner,76,0,133
+XSS,4,0,418
