@@ -1,0 +1,12 @@
+Audit item,Value
+Dataset version,DNN-EdgeIIoT-dataset.csv; sha256 1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7; 1217413981 bytes; downloaded 2026-10-15 from Kaggle mohamedamineferrag/edgeiiotset-cyber-security-dataset-of-iot-iiot
+Total records,2219201
+Unique devices,176693 distinct IPs in ip.src_host/ip.dst_host (6 in 192.168.*; the rest are mostly spoofed sources in DDoS_UDP). Excludes placeholder 0 / 0.0
+Normal records,1615643
+Attack records,603558
+Attack categories,14: DDoS_UDP 121568; DDoS_ICMP 116436; SQL_injection 51203; Password 50153; Vulnerability_scanner 50110; DDoS_TCP 50062; DDoS_HTTP 49911; Uploading 37634; Backdoor 24862; Port_Scanning 22564; XSS 15915; Ransomware 10925; MITM 1214; Fingerprinting 1001
+Time range,"frame.time has year + time of day only (no month/day). Parseable on 2096419 rows: 0 days 00:00:01.163427 to 0 days 23:59:59.358821 time of day, year 2021. Unparseable on 122782 rows (all DDoS_UDP and MITM rows, plus a handful of others)"
+Missing values,"frame.time 0; ip.src_host 0; ip.dst_host 0; tcp.srcport 0; tcp.dstport 0; tcp.flags 0; tcp.len 0; udp.port 0; Attack_label 0; Attack_type 0. Separately, 395980 rows have 0/0.0 as an IP placeholder"
+Duplicate records,"815 exact duplicates over all 63 columns; 187345 if frame.time is ignored. Rule: drop exact duplicates, keep first occurrence"
+Class imbalance,attack : normal = 0.374 : 1 (27.2% attack)
+File structure,"Rows form 15 contiguous label blocks in file order, one per Attack_type: separate captures concatenated"
