@@ -1,0 +1,33 @@
+# Default experiment. Runs on synthetic traffic so it works with no dataset.
+seed: 42
+
+data:
+  source: synthetic        # synthetic | csv
+  csv_path: null           # e.g. data/Edge-IIoTset.csv when source=csv
+  label_column: Attack_type
+  benign_label: Normal
+  drop_columns: []         # identifier/leaky columns to remove, see data/README.md
+  binary: false            # true = benign vs attack only
+  test_size: 0.2
+  # synthetic generator settings
+  n_samples: 20000
+  n_features: 40
+  n_classes: 6
+
+federation:
+  num_clients: 10
+  partition: dirichlet     # iid | dirichlet
+  dirichlet_alpha: 0.5     # lower = more skewed (non-IID) clients
+  rounds: 20
+  clients_per_round: 1.0   # fraction sampled each round
+
+client:
+  local_epochs: 2
+  batch_size: 64
+  lr: 0.001
+
+model:
+  hidden_dims: [128, 64]
+  dropout: 0.2
+
+output_dir: runs
