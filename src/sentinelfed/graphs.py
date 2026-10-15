@@ -30,11 +30,22 @@ class GraphConfig:
     seq_len: int = 8         # L, windows of history CE sees
 
 
+INPUT_CLIP = 5.0
+
+
 def record_matrix(feats: pd.DataFrame, packet_X: np.ndarray, edge_scaler) -> np.ndarray:
-    """Model input per record: scaled packet fields + engineered edge features."""
+    """Model input per record: scaled packet fields + engineered edge features.
+
+    Scaled values are clipped to +/-INPUT_CLIP. Fields that are almost always
+    zero (Modbus unit id, DNS retransmissions) otherwise scale to values
+    above 200 and dominate every loss and covariance downstream. The clip is
+    a fixed constant, not fitted on any split.
+    """
     eng = np.column_stack([np.log1p(feats["time_gap"].to_numpy()),
                            np.log(feats["byte_ratio"].to_numpy())])
     eng = edge_scaler.transform(eng)
+    packet_X = np.clip(packet_X, -INPUT_CLIP, INPUT_CLIP)
+    eng = np.clip(eng, -INPUT_CLIP, INPUT_CLIP)
     oc = pd.Categorical(feats["outcome"], categories=OUTCOMES).codes
     onehot = np.eye(len(OUTCOMES), dtype=np.float32)[oc]
     return np.hstack([packet_X, eng, feats[["first_seen"]].to_numpy(), onehot]).astype(np.float32)
