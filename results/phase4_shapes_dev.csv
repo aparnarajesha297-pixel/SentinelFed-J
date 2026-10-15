@@ -7,6 +7,6 @@ ego graphs: edge attributes,3005x61,mean 1.97 edges per graph
 activity: own pattern,1525x16,P=16 slots
 activity: other devices,1525x32x16,M=32; mean 1.99 others present
 LC h_L,1525x64,untrained (Phase 5 trains it)
-CE h_C,1525x64,L=8; masked-recon MSE 0.364->0.201
+CE h_C,1525x64,L=8; masked-recon MSE 0.313->0.160
 GC h_G,1525x64,untrained (Phase 5 trains it)
 Fusion h,1525x64,untrained; view weights saved alongside

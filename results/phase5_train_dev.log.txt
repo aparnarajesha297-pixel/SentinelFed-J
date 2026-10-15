@@ -1,0 +1,14 @@
+windows: train 797, val 347; U_train 351, U_val 248; 2 classes
+unsupervised branch (GRU autoencoder on U_train)
+  GRU-AE epoch 1: U_val reconstruction MSE 0.4470
+  GRU-AE epoch 2: U_val reconstruction MSE 0.4353
+  GRU-AE epoch 3: U_val reconstruction MSE 0.4241
+  val PR-AUC (unsupervised alone) 0.7175
+supervised branch, stage A: LC
+  LC epoch 1: val macro-F1 0.6735
+  LC epoch 2: val macro-F1 0.7302
+supervised branch, stage B: CE + GC + fusion + classifier
+  CE masked pretraining epoch 1: MSE 0.3871
+  CE masked pretraining epoch 2: MSE 0.2753
+  head epoch 1: val macro-F1 0.8066
+  head epoch 2: val macro-F1 0.8010

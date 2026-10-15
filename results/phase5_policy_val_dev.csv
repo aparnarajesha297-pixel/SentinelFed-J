@@ -1,0 +1,7 @@
+policy,decision,windows,share,attack_rate
+labels available,Trust,266,0.7665706051873199,0.09022556390977443
+labels available,Verify,48,0.138328530259366,0.875
+labels available,Reject,33,0.09510086455331412,1.0
+no labels,Trust,307,0.8847262247838616,0.20195439739413681
+no labels,Verify,0,0.0,
+no labels,Reject,40,0.11527377521613832,0.925

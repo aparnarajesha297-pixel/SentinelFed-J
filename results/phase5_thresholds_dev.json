@@ -1,0 +1,49 @@
+{
+  "tau_supervised": 0.5261997632980346,
+  "tau_unsupervised": 0.99,
+  "tau_supervised_rule": "maximises F1 of the supervised score on S_val",
+  "tau_unsupervised_rule": "1% false alarms on U_val (usable at sites with no labels)",
+  "seed": 0,
+  "seconds": 3.5,
+  "metrics_val": {
+    "val_windows": 347,
+    "val_attack_rate": 0.28530259365994237,
+    "supervised": {
+      "tau": 0.5261997632980346,
+      "F1": 0.8208092485549133,
+      "PR_AUC": 0.9141357477886571,
+      "ROC_AUC": 0.9557266210492017,
+      "macro_F1_multiclass": 0.8065620769292028
+    },
+    "unsupervised": {
+      "tau": 0.99,
+      "F1": 0.5323741007194245,
+      "PR_AUC": 0.7174836284021102,
+      "ROC_AUC": 0.8599503095470837,
+      "false_alarm_rate_U_val": 0.012096774193548387
+    },
+    "combined_risk": {
+      "alpha_supervised": 1.0,
+      "PR_AUC": 0.9141357477886571,
+      "ROC_AUC": 0.9557266210492017,
+      "F1_at_0.5": 0.7628865979381443
+    },
+    "fusion_mean_weights_val": {
+      "LC": 0.3594000041484833,
+      "CE": 0.28060001134872437,
+      "GC": 0.35989999771118164
+    },
+    "fusion_weights_val_by_class": {
+      "Normal": {
+        "LC": 0.36500000953674316,
+        "CE": 0.2619999945163727,
+        "GC": 0.37400001287460327
+      },
+      "Fingerprinting": {
+        "LC": 0.34700000286102295,
+        "CE": 0.32899999618530273,
+        "GC": 0.32499998807907104
+      }
+    }
+  }
+}
