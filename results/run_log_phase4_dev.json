@@ -1,0 +1,24 @@
+{
+  "phase": 4,
+  "seed": 0,
+  "segments": [
+    "0-4",
+    "12-0"
+  ],
+  "graph_config": {
+    "slot_seconds": 1.0,
+    "window": 3,
+    "hops": 1,
+    "max_nodes": 64,
+    "pattern_len": 16,
+    "max_others": 32,
+    "seq_len": 8
+  },
+  "hidden": 64,
+  "ce_epochs": 2,
+  "ce_masked_mse": [
+    0.3638179451227188,
+    0.20058666169643402
+  ],
+  "seconds": 20.1
+}

@@ -1,0 +1,12 @@
+component,shape,note
+features.csv,4532x13,one row per record
+record vectors,4532x60,scaled packet fields + edge features
+windows,1525x10,"w=3 one-second slots, per device"
+ego graphs: node features,3229x123,"1525 graphs, mean 2.12 nodes, max 4, k=1"
+ego graphs: edge attributes,3005x61,mean 1.97 edges per graph
+activity: own pattern,1525x16,P=16 slots
+activity: other devices,1525x32x16,M=32; mean 1.99 others present
+LC h_L,1525x64,untrained (Phase 5 trains it)
+CE h_C,1525x64,L=8; masked-recon MSE 0.364->0.201
+GC h_G,1525x64,untrained (Phase 5 trains it)
+Fusion h,1525x64,untrained; view weights saved alongside

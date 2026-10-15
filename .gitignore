@@ -11,3 +11,4 @@ data/*
 !data/README.md
 runs/
 artifacts/
+*.log
