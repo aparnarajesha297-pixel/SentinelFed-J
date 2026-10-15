@@ -1,0 +1,13 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "stress": false,
+  "dropped_features": [],
+  "threshold_rule": "best F1 on S_val per model and seed",
+  "seconds": 2317
+}
