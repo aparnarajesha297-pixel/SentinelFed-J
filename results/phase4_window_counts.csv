@@ -1,0 +1,14 @@
+attack_type,test,train,val
+Backdoor,1815,8051,1733
+DDoS_HTTP,90,333,75
+DDoS_ICMP,17457,81190,17400
+DDoS_TCP,7513,35021,7506
+Fingerprinting,97,446,99
+Normal,29482,120606,17088
+Password,4056,20056,4042
+Port_Scanning,3059,14069,3044
+Ransomware,1482,6649,1464
+SQL_injection,87,445,92
+Uploading,52,150,42
+Vulnerability_scanner,202,1052,209
+XSS,418,2107,422

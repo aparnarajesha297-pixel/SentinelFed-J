@@ -1,0 +1,2 @@
+record_id,split,segment_id,time_s,DeviceSrc,DeviceDst,protocol,Attack_label,Attack_type,time_gap,byte_ratio,first_seen,outcome
+5,train,0-0,42250.166159,192.168.0.128,192.168.0.101,TCP,0,Normal,2.7000001864507794e-05,0.08928571428571429,0,none
