@@ -1,0 +1,64 @@
+raw_column,status,reason
+tcp.srcport,kept,
+tcp.dstport,kept,
+udp.port,kept,
+tcp.flags,kept,
+tcp.flags.ack,kept,
+tcp.len,kept,
+tcp.seq,kept,
+tcp.ack,kept,
+tcp.connection.fin,kept,
+tcp.connection.rst,kept,
+tcp.connection.syn,kept,
+tcp.connection.synack,kept,
+udp.time_delta,kept,
+icmp.seq_le,kept,
+arp.opcode,kept,
+arp.hw.size,kept,
+http.content_length,kept,
+http.response,kept,
+http.tls_port,kept,
+dns.qry.qu,kept,
+dns.qry.type,kept,
+dns.retransmission,kept,
+dns.retransmit_request,kept,
+mqtt.hdrflags,kept,
+mqtt.len,kept,
+mqtt.msgtype,kept,
+mqtt.conflags,kept,
+mqtt.conflag.cleansess,kept,
+mqtt.proto_len,kept,
+mqtt.topic_len,kept,
+mqtt.ver,kept,
+mbtcp.len,kept,
+mbtcp.trans_id,kept,
+mbtcp.unit_id,kept,
+http.request.method,kept,
+http.request.version,kept,
+frame.time,transformed,replaced by Timestamp / time_s / segment_id
+ip.src_host,transformed,renamed DeviceSrc
+ip.dst_host,transformed,renamed DeviceDst
+arp.dst.proto_ipv4,dropped,"IP address: device identity, leaks label (Phase 1 finding 3)"
+arp.src.proto_ipv4,dropped,"IP address: device identity, leaks label (Phase 1 finding 3)"
+icmp.checksum,dropped,checksum: per-packet noise
+tcp.checksum,dropped,checksum: per-packet noise
+tcp.ack_raw,dropped,raw sequence number: per-connection random
+icmp.transmit_timestamp,dropped,"absolute clock value, not a behaviour feature"
+icmp.unused,dropped,always empty
+udp.stream,dropped,"capture-tool stream index: depends on recording, not behaviour"
+dns.retransmit_request_in,dropped,frame index into the capture file
+http.file_data,dropped,free-text payload
+http.request.uri.query,dropped,free-text payload
+http.request.full_uri,dropped,"free-text payload, contains target IP"
+http.referer,dropped,free-text payload
+tcp.options,dropped,raw hex bytes
+tcp.payload,dropped,raw hex payload
+mqtt.msg,dropped,raw hex payload (sensor readings)
+mqtt.topic,dropped,single constant topic name
+mqtt.protoname,dropped,constant 'MQTT' (protocol column covers it)
+mqtt.msg_decoded_as,dropped,constant
+mqtt.conack.flags,dropped,"hex string, constant"
+dns.qry.name,dropped,free-text query name
+dns.qry.name.len,dropped,holds query names in this release (mislabelled column)
+Attack_label,kept,"kept, see output"
+Attack_type,kept,"kept, see output"

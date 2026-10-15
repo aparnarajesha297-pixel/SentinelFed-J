@@ -1,0 +1,20 @@
+item,value
+raw records,2219201
+excluded records,122782
+clean records,2096419
+unique devices (all IPs),165159
+LAN hosts (192.168.*),5: 192.168.0.1 192.168.0.101 192.168.0.128 192.168.0.170 192.168.0.255
+segments (recordings),20
+records: Normal,1615643
+records: DDoS_ICMP,116436
+records: SQL_injection,51203
+records: Password,50153
+records: Vulnerability_scanner,50110
+records: DDoS_TCP,50062
+records: DDoS_HTTP,49911
+records: Uploading,37634
+records: Backdoor,24862
+records: Port_Scanning,22564
+records: XSS,15915
+records: Ransomware,10925
+records: Fingerprinting,1001
