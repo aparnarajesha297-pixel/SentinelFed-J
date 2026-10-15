@@ -1,0 +1,16 @@
+|--- sent:protocol_MQTT <= 0.02
+|   |--- recv:protocol_HTTP <= 0.50
+|   |   |--- sent:protocol_ICMP <= 0.58
+|   |   |   |--- class: 4
+|   |   |--- sent:protocol_ICMP >  0.58
+|   |   |   |--- class: 3
+|   |--- recv:protocol_HTTP >  0.50
+|   |   |--- sent:protocol_HTTP <= 0.39
+|   |   |   |--- class: 12
+|   |   |--- sent:protocol_HTTP >  0.39
+|   |   |   |--- class: 11
+|--- sent:protocol_MQTT >  0.02
+|   |--- recv:protocol_UDP <= 0.01
+|   |   |--- class: 0
+|   |--- recv:protocol_UDP >  0.01
+|   |   |--- class: 0

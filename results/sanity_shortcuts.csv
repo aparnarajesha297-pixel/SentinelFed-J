@@ -1,0 +1,8 @@
+model,features,F1,PR_AUC,macro_F1_multiclass
+"Decision tree, depth 3, protocol mix only",16,0.9925956453053094,0.9913016567994966,0.2588284044871841
+"Decision tree, depth 1, best single feature (sent:protocol_MQTT)",1,0.9925956453053094,0.9853001336351488,
+"Decision tree, depth 2, best single feature (sent:protocol_MQTT)",1,0.9925956453053094,0.9853001336351488,
+"Decision tree, depth 3, all window features",123,0.9925956453053094,0.9913977127381701,0.2672055342089553
+"Decision tree, depth 6, all window features",123,0.9925956453053094,0.997145740941105,0.6249471759384853
+"Logistic regression, all window features",123,0.9967305384265199,0.9999032044491025,0.9436145562072203
+Phase 5 supervised branch (LC+CE+GC+fusion),123,0.9990028805672502,0.999995260292749,0.9897665092693344
