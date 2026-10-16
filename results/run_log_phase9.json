@@ -1,0 +1,12 @@
+{
+  "scores_main": "data/phase6_stress",
+  "scores_compare": "data/phase6",
+  "seeds_main": 3,
+  "seeds_compare": 5,
+  "unit": "test windows",
+  "unreliable_below": 500,
+  "excluded_classes": {
+    "DDoS_UDP": "fields shifted in source CSV (Phase 1/2)",
+    "MITM": "fields shifted in source CSV (Phase 1/2)"
+  }
+}
