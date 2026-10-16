@@ -1,0 +1,75 @@
+{
+  "code_version": "b8effeadfeb6b6f1eab905ad07831ef2779c0505",
+  "code_dirty": false,
+  "data_version": {
+    "raw_csv_sha256": "1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7",
+    "processed": {
+      "processed_data.csv_sha256": "2d640aa4be061e128dbf71411a355467c8cdee65e21c383586a863fea4ee5bf0",
+      "rows": 2096419
+    }
+  },
+  "split_cut_points": "results/split_cutpoints.csv",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "gpu": false
+  },
+  "software": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "torch_geometric": "2.8.1",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "mode": "_protocol_blind",
+  "dropped_features": [
+    "tcp.srcport",
+    "tcp.dstport",
+    "udp.port",
+    "http.content_length",
+    "http.response",
+    "http.tls_port",
+    "dns.qry.qu",
+    "dns.qry.type",
+    "dns.retransmission",
+    "dns.retransmit_request",
+    "mqtt.hdrflags",
+    "mqtt.len",
+    "mqtt.msgtype",
+    "mqtt.conflags",
+    "mqtt.conflag.cleansess",
+    "mqtt.proto_len",
+    "mqtt.topic_len",
+    "mqtt.ver",
+    "mbtcp.len",
+    "mbtcp.trans_id",
+    "mbtcp.unit_id",
+    "protocol_ARP",
+    "protocol_HTTP",
+    "protocol_ICMP",
+    "protocol_MODBUS",
+    "protocol_MQTT",
+    "protocol_OTHER",
+    "protocol_TCP",
+    "protocol_UDP",
+    "http.request.method_GET",
+    "http.request.method_POST",
+    "http.request.method_TRACE",
+    "http.request.method_none",
+    "http.request.method_infrequent_sklearn",
+    "http.request.version_HTTP/1.0",
+    "http.request.version_HTTP/1.1",
+    "http.request.version_none",
+    "http.request.version_infrequent_sklearn"
+  ],
+  "threshold_rule": "best F1 on S_val per model and seed",
+  "seconds": 2616
+}
