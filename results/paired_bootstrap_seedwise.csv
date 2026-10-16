@@ -1,0 +1,16 @@
+seed,comparison,macro_F1_difference,ci95_low,ci95_high,ci_excludes_zero
+0,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",0.04912581095991286,0.0362842866280797,0.06262187260057876,True
+0,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",0.09077544961008144,0.0800581982820537,0.10032932599632445,True
+0,"Full SentinelFed-J (Dual Head, proposed) vs Full model, all features",0.06189345799738799,0.05440714342705323,0.06917933114050143,True
+1,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",0.03228132486101565,0.022895789588700775,0.04304397939956357,True
+1,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",0.09255642825337518,0.08242351230112176,0.10352907514110885,True
+1,"Full SentinelFed-J (Dual Head, proposed) vs Full model, all features",0.10160597635983182,0.09431670848603069,0.10851295346093615,True
+2,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",0.07289091348101306,0.05916499822744291,0.08775230868830265,True
+2,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",0.09380923125989993,0.08441743600174723,0.10416223329172561,True
+2,"Full SentinelFed-J (Dual Head, proposed) vs Full model, all features",0.03314197063231694,0.023620294496692805,0.04236632825713544,True
+3,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",0.02443074556878988,0.01357882075106985,0.03559264086922136,True
+3,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",0.08332037554890159,0.07372087003668772,0.09335700488463858,True
+3,"Full SentinelFed-J (Dual Head, proposed) vs Full model, all features",0.01845188782783247,0.008890497033673308,0.028191533517009922,True
+4,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",0.028626756329032887,0.018716830471380817,0.03907069406070438,True
+4,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",0.08927853632293081,0.07834226583710409,0.10001687602820429,True
+4,"Full SentinelFed-J (Dual Head, proposed) vs Full model, all features",0.06000826423464545,0.04741707687259883,0.07158629121165436,True

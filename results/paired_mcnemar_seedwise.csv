@@ -1,0 +1,36 @@
+seed,comparison,windows_only_reference_right,windows_only_other_right,mcnemar_p
+0,"Full SentinelFed-J (Dual Head, proposed) vs Supervised branch alone (LC+CE+GC+Fusion)",0,0,1.0
+0,"Full SentinelFed-J (Dual Head, proposed) vs Unsupervised branch alone (GRU-AE + Mahalanobis)",2209,57,0.0
+0,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",172,41,2.803731196457422e-20
+0,"Full SentinelFed-J (Dual Head, proposed) vs Isolation Forest",1209,61,1.0137407186527279e-277
+0,"Full SentinelFed-J (Dual Head, proposed) vs One-Class SVM",3255,57,0.0
+0,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",469,66,6.823096788699818e-76
+0,"Full SentinelFed-J (Dual Head, proposed) vs Depth-1 tree, best single feature (log_n_sent)",1667,62,0.0
+1,"Full SentinelFed-J (Dual Head, proposed) vs Supervised branch alone (LC+CE+GC+Fusion)",0,0,1.0
+1,"Full SentinelFed-J (Dual Head, proposed) vs Unsupervised branch alone (GRU-AE + Mahalanobis)",2031,63,0.0
+1,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",113,23,1.818716912352605e-15
+1,"Full SentinelFed-J (Dual Head, proposed) vs Isolation Forest",1315,64,2.4328275236780373e-304
+1,"Full SentinelFed-J (Dual Head, proposed) vs One-Class SVM",2724,63,0.0
+1,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",463,72,6.359652101309289e-71
+1,"Full SentinelFed-J (Dual Head, proposed) vs Depth-1 tree, best single feature (log_n_sent)",1658,65,0.0
+2,"Full SentinelFed-J (Dual Head, proposed) vs Supervised branch alone (LC+CE+GC+Fusion)",0,0,1.0
+2,"Full SentinelFed-J (Dual Head, proposed) vs Unsupervised branch alone (GRU-AE + Mahalanobis)",1503,56,0.0
+2,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",232,36,2.9546302447709965e-36
+2,"Full SentinelFed-J (Dual Head, proposed) vs Isolation Forest",1207,56,2.5703042585685212e-282
+2,"Full SentinelFed-J (Dual Head, proposed) vs One-Class SVM",2666,56,0.0
+2,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",471,60,3.9219623706787264e-80
+2,"Full SentinelFed-J (Dual Head, proposed) vs Depth-1 tree, best single feature (log_n_sent)",1669,56,0.0
+3,"Full SentinelFed-J (Dual Head, proposed) vs Supervised branch alone (LC+CE+GC+Fusion)",0,0,1.0
+3,"Full SentinelFed-J (Dual Head, proposed) vs Unsupervised branch alone (GRU-AE + Mahalanobis)",2209,61,0.0
+3,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",160,39,1.3427096533312986e-18
+3,"Full SentinelFed-J (Dual Head, proposed) vs Isolation Forest",1048,63,4.877014748943457e-231
+3,"Full SentinelFed-J (Dual Head, proposed) vs One-Class SVM",2517,61,0.0
+3,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",468,64,7.179403139712431e-77
+3,"Full SentinelFed-J (Dual Head, proposed) vs Depth-1 tree, best single feature (log_n_sent)",1668,62,0.0
+4,"Full SentinelFed-J (Dual Head, proposed) vs Supervised branch alone (LC+CE+GC+Fusion)",0,0,1.0
+4,"Full SentinelFed-J (Dual Head, proposed) vs Unsupervised branch alone (GRU-AE + Mahalanobis)",2157,61,0.0
+4,"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",165,40,3.138101300574705e-19
+4,"Full SentinelFed-J (Dual Head, proposed) vs Isolation Forest",1275,61,3.2421468707812977e-296
+4,"Full SentinelFed-J (Dual Head, proposed) vs One-Class SVM",2857,61,0.0
+4,"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",465,61,5.274360782740308e-78
+4,"Full SentinelFed-J (Dual Head, proposed) vs Depth-1 tree, best single feature (log_n_sent)",1667,61,0.0

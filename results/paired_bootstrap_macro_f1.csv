@@ -1,0 +1,4 @@
+comparison,seeds,mean_difference,min_ci95_low,max_ci95_high,seeds_ci_excludes_zero
+"Full SentinelFed-J (Dual Head, proposed) vs Full model, all features",5,0.055020311410402936,0.008890497033673308,0.10851295346093615,5
+"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",5,0.08994800419903778,0.07372087003668772,0.10416223329172561,5
+"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",5,0.04147111023995287,0.01357882075106985,0.08775230868830265,5

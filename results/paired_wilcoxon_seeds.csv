@@ -1,0 +1,2 @@
+comparison,seeds,mean_macro_F1_difference,wilcoxon_p,note
+"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",5,0.04147111023995287,0.0625,with 5 seeds the smallest attainable p is 0.0625

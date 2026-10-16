@@ -1,0 +1,8 @@
+comparison,seeds,mean_only_reference_right,mean_only_other_right,max_mcnemar_p,seeds_p_below_0_05
+"Full SentinelFed-J (Dual Head, proposed) vs Depth-1 tree, best single feature (log_n_sent)",5,1665.8,61.2,0.0,5
+"Full SentinelFed-J (Dual Head, proposed) vs Isolation Forest",5,1210.8,61.0,4.877014748943457e-231,5
+"Full SentinelFed-J (Dual Head, proposed) vs Logistic regression (window features)",5,467.2,64.6,6.359652101309289e-71,5
+"Full SentinelFed-J (Dual Head, proposed) vs One-Class SVM",5,2803.8,59.6,0.0,5
+"Full SentinelFed-J (Dual Head, proposed) vs Static graph baseline (GINE)",5,168.4,35.8,1.818716912352605e-15,5
+"Full SentinelFed-J (Dual Head, proposed) vs Supervised branch alone (LC+CE+GC+Fusion)",5,0.0,0.0,1.0,0
+"Full SentinelFed-J (Dual Head, proposed) vs Unsupervised branch alone (GRU-AE + Mahalanobis)",5,2021.8,59.6,0.0,5
