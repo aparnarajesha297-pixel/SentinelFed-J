@@ -445,6 +445,10 @@ def report(res):
                 # smallest setting within 0.002 of the best validation score
                 pick = d[d["val macro-F1"] >= best - 0.002].iloc[0]["setting"]
                 choice[study] = pick
+        from sentinelfed.runlog import environment
+        (res / "run_log_phase10.json").write_text(json.dumps({
+            **environment(), "seeds": sorted(r["seed"].unique().tolist()), "model": "protocol-blind, supervised branch",
+            "threshold_rule": "best F1 on validation", "runs_file": RUNS}, indent=2, default=str))
         (res / "phase10_choice.json").write_text(json.dumps({
             "rule": "smallest setting within 0.002 of the best mean validation macro-F1", **choice}, indent=2))
         out["choice"] = choice
