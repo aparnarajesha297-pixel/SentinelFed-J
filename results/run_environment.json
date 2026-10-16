@@ -1,0 +1,418 @@
+{
+  "code_version": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+  "code_dirty": false,
+  "data_version": {
+    "raw_csv_sha256": "1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7",
+    "processed": {
+      "processed_data.csv_sha256": "2d640aa4be061e128dbf71411a355467c8cdee65e21c383586a863fea4ee5bf0",
+      "rows": 2096419
+    }
+  },
+  "split_cut_points": "results/split_cutpoints.csv",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "gpu": false
+  },
+  "software": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "torch_geometric": "2.8.1",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "note": "All runs used this container; code_version below is the commit at the time this file was written. Per-file commits give the code that produced each result.",
+  "results": {
+    "ablation.png": {
+      "commit": "445311d693c6eef311c2ce1887e1c11787e863fa",
+      "date": "2026-10-15T16:47:00+00:00",
+      "subject": "Add Phase 7 ablation results (protocol-blind, 5 seeds)"
+    },
+    "ablation_increments.csv": {
+      "commit": "445311d693c6eef311c2ce1887e1c11787e863fa",
+      "date": "2026-10-15T16:47:00+00:00",
+      "subject": "Add Phase 7 ablation results (protocol-blind, 5 seeds)"
+    },
+    "ablation_results.csv": {
+      "commit": "445311d693c6eef311c2ce1887e1c11787e863fa",
+      "date": "2026-10-15T16:47:00+00:00",
+      "subject": "Add Phase 7 ablation results (protocol-blind, 5 seeds)"
+    },
+    "ablation_seedwise.csv": {
+      "commit": "445311d693c6eef311c2ce1887e1c11787e863fa",
+      "date": "2026-10-15T16:47:00+00:00",
+      "subject": "Add Phase 7 ablation results (protocol-blind, 5 seeds)"
+    },
+    "calibration_results.csv": {
+      "commit": "f2fadb5569f378f264b65c2b31aca0a6e7302872",
+      "date": "2026-10-15T17:40:37+00:00",
+      "subject": "Add Phase 8 calibration and Trust/Verify/Reject test evaluation"
+    },
+    "calibration_seedwise.csv": {
+      "commit": "f2fadb5569f378f264b65c2b31aca0a6e7302872",
+      "date": "2026-10-15T17:40:37+00:00",
+      "subject": "Add Phase 8 calibration and Trust/Verify/Reject test evaluation"
+    },
+    "dataset_audit.csv": {
+      "commit": "f54fb41cd78a820ae1ba1842cb2476116c5ba338",
+      "date": "2026-10-15T07:33:05+00:00",
+      "subject": "Add Phase 1 dataset audit for Edge-IIoTset DNN CSV"
+    },
+    "dataset_audit_per_class.csv": {
+      "commit": "f54fb41cd78a820ae1ba1842cb2476116c5ba338",
+      "date": "2026-10-15T07:33:05+00:00",
+      "subject": "Add Phase 1 dataset audit for Edge-IIoTset DNN CSV"
+    },
+    "decision_regions.png": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "decision_regions_dev.png": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "disagreement_distribution.png": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "disagreement_distribution_dev.png": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "experiment1_results.csv": {
+      "commit": "048f04f4ec557d381995a73182a32259e3f61069",
+      "date": "2026-10-15T11:31:24+00:00",
+      "subject": "Add Phase 6 main results (5 seeds) and protocol-blind stress test"
+    },
+    "experiment1_results_protocol_blind.csv": {
+      "commit": "32c77997e0ad186d8229f3a188d41224b721796c",
+      "date": "2026-10-16T16:50:40+00:00",
+      "subject": "Add protocol-blind Phase 6 main results (all baselines, 5 seeds) and Fig. 4"
+    },
+    "experiment1_seedwise.csv": {
+      "commit": "048f04f4ec557d381995a73182a32259e3f61069",
+      "date": "2026-10-15T11:31:24+00:00",
+      "subject": "Add Phase 6 main results (5 seeds) and protocol-blind stress test"
+    },
+    "experiment1_seedwise_protocol_blind.csv": {
+      "commit": "32c77997e0ad186d8229f3a188d41224b721796c",
+      "date": "2026-10-16T16:50:40+00:00",
+      "subject": "Add protocol-blind Phase 6 main results (all baselines, 5 seeds) and Fig. 4"
+    },
+    "fig1_architecture.png": {
+      "commit": "fc75b10af935351d5c314610a719624d54bd3be3",
+      "date": "2026-10-16T07:23:09+00:00",
+      "subject": "Close guide gaps: run logs, paired tests, figures, protocol-blind Phase 6"
+    },
+    "fig2_lats_split.png": {
+      "commit": "fc75b10af935351d5c314610a719624d54bd3be3",
+      "date": "2026-10-16T07:23:09+00:00",
+      "subject": "Close guide gaps: run logs, paired tests, figures, protocol-blind Phase 6"
+    },
+    "fig3_pipeline.png": {
+      "commit": "fc75b10af935351d5c314610a719624d54bd3be3",
+      "date": "2026-10-16T07:23:09+00:00",
+      "subject": "Close guide gaps: run logs, paired tests, figures, protocol-blind Phase 6"
+    },
+    "fig4_main_comparison.png": {
+      "commit": "32c77997e0ad186d8229f3a188d41224b721796c",
+      "date": "2026-10-16T16:50:40+00:00",
+      "subject": "Add protocol-blind Phase 6 main results (all baselines, 5 seeds) and Fig. 4"
+    },
+    "imbalance_results.csv": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "leakage_comparison.png": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "leakage_results.csv": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "paired_bootstrap_macro_f1.csv": {
+      "commit": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+      "date": "2026-10-16T16:58:45+00:00",
+      "subject": "Add paired significance tests (protocol-blind, 5 seeds)"
+    },
+    "paired_bootstrap_seedwise.csv": {
+      "commit": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+      "date": "2026-10-16T16:58:45+00:00",
+      "subject": "Add paired significance tests (protocol-blind, 5 seeds)"
+    },
+    "paired_mcnemar.csv": {
+      "commit": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+      "date": "2026-10-16T16:58:45+00:00",
+      "subject": "Add paired significance tests (protocol-blind, 5 seeds)"
+    },
+    "paired_mcnemar_seedwise.csv": {
+      "commit": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+      "date": "2026-10-16T16:58:45+00:00",
+      "subject": "Add paired significance tests (protocol-blind, 5 seeds)"
+    },
+    "paired_wilcoxon_seeds.csv": {
+      "commit": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+      "date": "2026-10-16T16:58:45+00:00",
+      "subject": "Add paired significance tests (protocol-blind, 5 seeds)"
+    },
+    "per_attack_f1_recall.png": {
+      "commit": "9786abde57f83d2be970d70088c71969a4b8f834",
+      "date": "2026-10-16T04:18:19+00:00",
+      "subject": "Add Phase 9 per-attack evaluation"
+    },
+    "per_attack_results.csv": {
+      "commit": "9786abde57f83d2be970d70088c71969a4b8f834",
+      "date": "2026-10-16T04:18:19+00:00",
+      "subject": "Add Phase 9 per-attack evaluation"
+    },
+    "phase10_choice.json": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "phase10_runs.csv": {
+      "commit": "b8effeadfeb6b6f1eab905ad07831ef2779c0505",
+      "date": "2026-10-16T16:06:36+00:00",
+      "subject": "Add complete Phase 10 results (protocol-blind, 3 seeds)"
+    },
+    "phase2_columns.csv": {
+      "commit": "9f57cc6296297fee988ab9760ddbb94c786b2cbb",
+      "date": "2026-10-15T07:46:18+00:00",
+      "subject": "Add Phase 2 clean data table builder"
+    },
+    "phase2_segments.csv": {
+      "commit": "9f57cc6296297fee988ab9760ddbb94c786b2cbb",
+      "date": "2026-10-15T07:46:18+00:00",
+      "subject": "Add Phase 2 clean data table builder"
+    },
+    "phase2_summary.csv": {
+      "commit": "9f57cc6296297fee988ab9760ddbb94c786b2cbb",
+      "date": "2026-10-15T07:46:18+00:00",
+      "subject": "Add Phase 2 clean data table builder"
+    },
+    "phase4_feature_example.csv": {
+      "commit": "cbbae5655d511f23baccc83a9066aac6b16c90ab",
+      "date": "2026-10-15T08:18:31+00:00",
+      "subject": "Add Phase 4 full-run shapes, window counts and example feature row"
+    },
+    "phase4_feature_example_dev.csv": {
+      "commit": "fb5c655d9053eb9a4ec594416bfa421456fa10a9",
+      "date": "2026-10-15T08:11:08+00:00",
+      "subject": "Add Phase 4 dev-run results (Normal 0-4 + Fingerprinting)"
+    },
+    "phase4_shapes.csv": {
+      "commit": "cbbae5655d511f23baccc83a9066aac6b16c90ab",
+      "date": "2026-10-15T08:18:31+00:00",
+      "subject": "Add Phase 4 full-run shapes, window counts and example feature row"
+    },
+    "phase4_shapes_dev.csv": {
+      "commit": "24116ae814d94ab845ade55c13bdcb876839e766",
+      "date": "2026-10-15T09:51:15+00:00",
+      "subject": "Add Phase 5 dev-run outputs and refresh Phase 4 dev results"
+    },
+    "phase4_window_counts.csv": {
+      "commit": "cbbae5655d511f23baccc83a9066aac6b16c90ab",
+      "date": "2026-10-15T08:18:31+00:00",
+      "subject": "Add Phase 4 full-run shapes, window counts and example feature row"
+    },
+    "phase4_window_counts_dev.csv": {
+      "commit": "fb5c655d9053eb9a4ec594416bfa421456fa10a9",
+      "date": "2026-10-15T08:11:08+00:00",
+      "subject": "Add Phase 4 dev-run results (Normal 0-4 + Fingerprinting)"
+    },
+    "phase5_policy_by_type_val.csv": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase5_policy_by_type_val_dev.csv": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase5_policy_val.csv": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase5_policy_val_dev.csv": {
+      "commit": "24116ae814d94ab845ade55c13bdcb876839e766",
+      "date": "2026-10-15T09:51:15+00:00",
+      "subject": "Add Phase 5 dev-run outputs and refresh Phase 4 dev results"
+    },
+    "phase5_thresholds.json": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase5_thresholds_dev.json": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase5_train.log.txt": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase5_train_dev.log.txt": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "phase8_policy_by_type_test.csv": {
+      "commit": "f2fadb5569f378f264b65c2b31aca0a6e7302872",
+      "date": "2026-10-15T17:40:37+00:00",
+      "subject": "Add Phase 8 calibration and Trust/Verify/Reject test evaluation"
+    },
+    "phase8_policy_test.csv": {
+      "commit": "f2fadb5569f378f264b65c2b31aca0a6e7302872",
+      "date": "2026-10-15T17:40:37+00:00",
+      "subject": "Add Phase 8 calibration and Trust/Verify/Reject test evaluation"
+    },
+    "reliability_diagram.png": {
+      "commit": "f2fadb5569f378f264b65c2b31aca0a6e7302872",
+      "date": "2026-10-15T17:40:37+00:00",
+      "subject": "Add Phase 8 calibration and Trust/Verify/Reject test evaluation"
+    },
+    "risk_distribution.png": {
+      "commit": "042b65e00e0a5753ee3d33a55f2396f3a70d5a2d",
+      "date": "2026-10-15T10:14:18+00:00",
+      "subject": "Add Phase 5 results: thresholds, validation policy and plots"
+    },
+    "risk_distribution_dev.png": {
+      "commit": "24116ae814d94ab845ade55c13bdcb876839e766",
+      "date": "2026-10-15T09:51:15+00:00",
+      "subject": "Add Phase 5 dev-run outputs and refresh Phase 4 dev results"
+    },
+    "run_log_paired_tests.json": {
+      "commit": "9fa0924a66cf77815e3d9fef4a6ffc5be23fe4bc",
+      "date": "2026-10-16T16:58:45+00:00",
+      "subject": "Add paired significance tests (protocol-blind, 5 seeds)"
+    },
+    "run_log_phase10.json": {
+      "commit": "b8effeadfeb6b6f1eab905ad07831ef2779c0505",
+      "date": "2026-10-16T16:06:36+00:00",
+      "subject": "Add complete Phase 10 results (protocol-blind, 3 seeds)"
+    },
+    "run_log_phase3.json": {
+      "commit": "b03df5d1cd5b87b5b2a12768365df84cf76ebf24",
+      "date": "2026-10-15T07:55:10+00:00",
+      "subject": "Add Phase 3 split audit, cut points and run log"
+    },
+    "run_log_phase4.json": {
+      "commit": "8aec53a6db6132ffaa677e76b75f42aac83bc395",
+      "date": "2026-10-15T10:05:54+00:00",
+      "subject": "Phase 5: logit-scale decision plot, save validation scores"
+    },
+    "run_log_phase4_dev.json": {
+      "commit": "24116ae814d94ab845ade55c13bdcb876839e766",
+      "date": "2026-10-15T09:51:15+00:00",
+      "subject": "Add Phase 5 dev-run outputs and refresh Phase 4 dev results"
+    },
+    "run_log_phase6.json": {
+      "commit": "048f04f4ec557d381995a73182a32259e3f61069",
+      "date": "2026-10-15T11:31:24+00:00",
+      "subject": "Add Phase 6 main results (5 seeds) and protocol-blind stress test"
+    },
+    "run_log_phase6_protocol_blind.json": {
+      "commit": "32c77997e0ad186d8229f3a188d41224b721796c",
+      "date": "2026-10-16T16:50:40+00:00",
+      "subject": "Add protocol-blind Phase 6 main results (all baselines, 5 seeds) and Fig. 4"
+    },
+    "run_log_phase6_stress.json": {
+      "commit": "048f04f4ec557d381995a73182a32259e3f61069",
+      "date": "2026-10-15T11:31:24+00:00",
+      "subject": "Add Phase 6 main results (5 seeds) and protocol-blind stress test"
+    },
+    "run_log_phase7.json": {
+      "commit": "445311d693c6eef311c2ce1887e1c11787e863fa",
+      "date": "2026-10-15T16:47:00+00:00",
+      "subject": "Add Phase 7 ablation results (protocol-blind, 5 seeds)"
+    },
+    "run_log_phase8.json": {
+      "commit": "f2fadb5569f378f264b65c2b31aca0a6e7302872",
+      "date": "2026-10-15T17:40:37+00:00",
+      "subject": "Add Phase 8 calibration and Trust/Verify/Reject test evaluation"
+    },
+    "run_log_phase9.json": {
+      "commit": "9786abde57f83d2be970d70088c71969a4b8f834",
+      "date": "2026-10-16T04:18:19+00:00",
+      "subject": "Add Phase 9 per-attack evaluation"
+    },
+    "sanity_protocol_tree.txt": {
+      "commit": "bb9b6110acbcef715cae0d055aaf5451496d9aee",
+      "date": "2026-10-15T10:26:05+00:00",
+      "subject": "Add shortcut sanity check against trivial baselines"
+    },
+    "sanity_shortcuts.csv": {
+      "commit": "bb9b6110acbcef715cae0d055aaf5451496d9aee",
+      "date": "2026-10-15T10:26:05+00:00",
+      "subject": "Add shortcut sanity check against trivial baselines"
+    },
+    "sanity_single_feature.csv": {
+      "commit": "bb9b6110acbcef715cae0d055aaf5451496d9aee",
+      "date": "2026-10-15T10:26:05+00:00",
+      "subject": "Add shortcut sanity check against trivial baselines"
+    },
+    "sensitivity_classifier.png": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "sensitivity_hop.png": {
+      "commit": "b8effeadfeb6b6f1eab905ad07831ef2779c0505",
+      "date": "2026-10-16T16:06:36+00:00",
+      "subject": "Add complete Phase 10 results (protocol-blind, 3 seeds)"
+    },
+    "sensitivity_results.csv": {
+      "commit": "b8effeadfeb6b6f1eab905ad07831ef2779c0505",
+      "date": "2026-10-16T16:06:36+00:00",
+      "subject": "Add complete Phase 10 results (protocol-blind, 3 seeds)"
+    },
+    "sensitivity_window.png": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "sparsity_results.csv": {
+      "commit": "716926c6730393e1bfbfb930115436ceb1381e39",
+      "date": "2026-10-16T11:55:59+00:00",
+      "subject": "Phase 10: low-memory graph storage for the hop study"
+    },
+    "split_audit.csv": {
+      "commit": "b03df5d1cd5b87b5b2a12768365df84cf76ebf24",
+      "date": "2026-10-15T07:55:10+00:00",
+      "subject": "Add Phase 3 split audit, cut points and run log"
+    },
+    "split_checks.csv": {
+      "commit": "b03df5d1cd5b87b5b2a12768365df84cf76ebf24",
+      "date": "2026-10-15T07:55:10+00:00",
+      "subject": "Add Phase 3 split audit, cut points and run log"
+    },
+    "split_cutpoints.csv": {
+      "commit": "b03df5d1cd5b87b5b2a12768365df84cf76ebf24",
+      "date": "2026-10-15T07:55:10+00:00",
+      "subject": "Add Phase 3 split audit, cut points and run log"
+    },
+    "stress_test_results.csv": {
+      "commit": "048f04f4ec557d381995a73182a32259e3f61069",
+      "date": "2026-10-15T11:31:24+00:00",
+      "subject": "Add Phase 6 main results (5 seeds) and protocol-blind stress test"
+    },
+    "stress_test_seedwise.csv": {
+      "commit": "048f04f4ec557d381995a73182a32259e3f61069",
+      "date": "2026-10-15T11:31:24+00:00",
+      "subject": "Add Phase 6 main results (5 seeds) and protocol-blind stress test"
+    }
+  }
+}
