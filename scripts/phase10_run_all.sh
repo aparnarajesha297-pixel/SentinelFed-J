@@ -40,7 +40,20 @@ sweep() {  # study flag values...
   done
 }
 sweep window --window 2 4 5 6
-sweep hop --hops 2 3 4
+# Hop study: k >= 2 graphs need float16, memory-mapped storage to fit in memory.
+# k1f16 rebuilds k = 1 the same way, as a control for the storage change.
+for spec in "1 k1f16" "2 k2" "3 k3" "4 k4"; do
+  set -- $spec; k=$1; setting=$2; dir="data/phase4_${setting}"
+  if [ "$(done_count hop "$setting")" -ge 3 ]; then rm -rf "$dir"; continue; fi
+  if [ ! -d "$dir/ego_graphs" ] || [ ! -f "$dir/build_seconds.txt" ]; then
+    rm -rf "$dir"; t0=$(date +%s)
+    python3 scripts/phase4_build.py --hops "$k" --float16 --graphs-only --out "$dir" \
+      --results "$dir/build_results" > "$dir.build.log" 2>&1
+    echo $(( $(date +%s) - t0 )) > "$dir/build_seconds.txt"
+  fi
+  python3 $P --study hop --setting "$setting" --phase4 "$dir" --build-seconds "$(cat "$dir/build_seconds.txt")"
+  rm -rf "$dir"
+done
 
 python3 $P --report
 echo "phase10 sweep complete"

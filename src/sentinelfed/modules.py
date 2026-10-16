@@ -21,9 +21,9 @@ def ego_batch(ego: dict, ids: np.ndarray) -> Batch:
     for i in ids:
         n0, n1 = ego["node_ptr"][i], ego["node_ptr"][i + 1]
         e0, e1 = ego["edge_ptr"][i], ego["edge_ptr"][i + 1]
-        graphs.append(Data(x=torch.from_numpy(ego["node_feat"][n0:n1]),
+        graphs.append(Data(x=torch.from_numpy(np.asarray(ego["node_feat"][n0:n1], dtype=np.float32)),
                            edge_index=torch.from_numpy(ego["edge_index"][:, e0:e1]),
-                           edge_attr=torch.from_numpy(ego["edge_attr"][e0:e1])))
+                           edge_attr=torch.from_numpy(np.asarray(ego["edge_attr"][e0:e1], dtype=np.float32))))
     return Batch.from_data_list(graphs)
 
 

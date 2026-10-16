@@ -1,0 +1,33 @@
+{
+  "code_version": "ee5a7e281fa9734a020539827c97eddc894c7f0a",
+  "code_dirty": false,
+  "data_version": {
+    "raw_csv_sha256": "1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7",
+    "processed": {
+      "processed_data.csv_sha256": "2d640aa4be061e128dbf71411a355467c8cdee65e21c383586a863fea4ee5bf0",
+      "rows": 2096419
+    }
+  },
+  "split_cut_points": "results/split_cutpoints.csv",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "gpu": false
+  },
+  "software": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "torch_geometric": "2.8.1",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "model": "protocol-blind, supervised branch",
+  "threshold_rule": "best F1 on validation",
+  "runs_file": "phase10_runs.csv"
+}

@@ -1,0 +1,5 @@
+{
+  "rule": "smallest setting within 0.002 of the best mean validation macro-F1",
+  "window": "w2",
+  "hop": "k1"
+}

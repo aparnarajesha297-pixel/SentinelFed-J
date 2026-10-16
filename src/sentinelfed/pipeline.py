@@ -53,7 +53,11 @@ def load_phase4(path="data/phase4", drop=None) -> Data:
     feature names; matching features are zeroed in every input."""
     p = Path(path)
     W = pickle.load(open(p / "windows.pkl", "rb"))
-    ego = pickle.load(open(p / "ego_graphs.pkl", "rb"))
+    if (p / "ego_graphs").is_dir():     # low-memory format: one .npy per array, memory-mapped
+        ego = {k: np.load(p / "ego_graphs" / f"{k}.npy", mmap_mode="r")
+               for k in ("node_feat", "edge_index", "edge_attr", "node_ptr", "edge_ptr")}
+    else:
+        ego = pickle.load(open(p / "ego_graphs.pkl", "rb"))
     act = pickle.load(open(p / "activity_flags.pkl", "rb"))
     windows, center = W["windows"], W["center_feat"]
     dropped = []
@@ -66,9 +70,9 @@ def load_phase4(path="data/phase4", drop=None) -> Data:
         center = center.copy()
         center[:, node_cols] = 0.0
         ego = dict(ego)
-        ego["node_feat"] = ego["node_feat"].copy()
+        ego["node_feat"] = np.array(ego["node_feat"])
         ego["node_feat"][:, node_cols] = 0.0
-        ego["edge_attr"] = ego["edge_attr"].copy()
+        ego["edge_attr"] = np.array(ego["edge_attr"])
         ego["edge_attr"][:, cols] = 0.0
     classes = ["Normal"] + sorted(c for c in windows["attack_type"].unique() if c != "Normal")
     y_multi = windows["attack_type"].map({c: i for i, c in enumerate(classes)}).to_numpy()

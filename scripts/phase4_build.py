@@ -70,6 +70,9 @@ def main() -> None:
     ap.add_argument("--hidden", type=int, default=64)
     ap.add_argument("--ce-epochs", type=int, default=2)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--float16", action="store_true", help="store ego graphs in float16")
+    ap.add_argument("--graphs-only", action="store_true",
+                    help="stop after saving windows, graphs and activity (no demo embeddings)")
     args = ap.parse_args()
     out, art, res = Path(args.out), Path(args.artifacts), Path(args.results)
     for p in (out, art, res):
@@ -107,15 +110,20 @@ def main() -> None:
     log_shape(rows, "record vectors", X.shape, "scaled packet fields + edge features")
 
     # ---- 2-4. windows, ego graphs, activity --------------------------------
-    cfg = GraphConfig(window=args.window, hops=args.hops)
+    cfg = GraphConfig(window=args.window, hops=args.hops, float16=args.float16)
     built = WindowBuilder(feats, X, cfg).build()
     windows = built["windows"]
     print(f"  windows built in {time.time() - t0:.0f}s")
     with open(out / "windows.pkl", "wb") as f:
         pickle.dump({"windows": windows, "seq_idx": built["seq_idx"],
                      "center_feat": built["center_feat"], "config": built["config"]}, f)
-    with open(out / "ego_graphs.pkl", "wb") as f:
-        pickle.dump(built["ego"], f)
+    if args.float16:
+        (out / "ego_graphs").mkdir(exist_ok=True)
+        for k, v in built["ego"].items():
+            np.save(out / "ego_graphs" / f"{k}.npy", v)
+    else:
+        with open(out / "ego_graphs.pkl", "wb") as f:
+            pickle.dump(built["ego"], f)
     with open(out / "activity_flags.pkl", "wb") as f:
         pickle.dump(built["activity"], f)
     ego, act = built["ego"], built["activity"]
@@ -128,6 +136,11 @@ def main() -> None:
     log_shape(rows, "activity: own pattern", act["own"].shape, f"P={cfg.pattern_len} slots")
     log_shape(rows, "activity: other devices", act["others"].shape,
               f"M={cfg.max_others}; mean {act['others_mask'].sum(1).mean():.2f} others present")
+
+    if args.graphs_only:
+        pd.DataFrame(rows).to_csv(res / "phase4_shapes.csv", index=False)
+        print(f"graphs only: done in {time.time() - t0:.0f}s")
+        return
 
     # ---- 5. LC ---------------------------------------------------------------
     H = args.hidden

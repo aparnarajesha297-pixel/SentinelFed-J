@@ -34,9 +34,9 @@ def collate(ego: dict, ids: np.ndarray) -> SimpleNamespace:
     eidx = np.arange(ec.sum()) - np.repeat(eoff, ec) + np.repeat(e0, ec)
     edge_index = ego["edge_index"][:, eidx] + np.repeat(noff, ec)
     return SimpleNamespace(
-        x=torch.from_numpy(ego["node_feat"][nidx]),
+        x=torch.from_numpy(np.asarray(ego["node_feat"][nidx], dtype=np.float32)),
         edge_index=torch.from_numpy(edge_index),
-        edge_attr=torch.from_numpy(ego["edge_attr"][eidx]),
+        edge_attr=torch.from_numpy(np.asarray(ego["edge_attr"][eidx], dtype=np.float32)),
         batch=torch.from_numpy(np.repeat(np.arange(len(ids)), nc)),
         ptr=torch.from_numpy(np.concatenate([[0], np.cumsum(nc)])),
     )

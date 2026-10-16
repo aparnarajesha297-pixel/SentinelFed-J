@@ -28,6 +28,7 @@ class GraphConfig:
     pattern_len: int = 16    # P, slots of activity history for GC
     max_others: int = 32     # M, other devices GC compares against
     seq_len: int = 8         # L, windows of history CE sees
+    float16: bool = False    # store ego graphs in float16 (k >= 2 graphs do not fit otherwise)
 
 
 INPUT_CLIP = 5.0
@@ -60,6 +61,28 @@ def _aggregate(keys: np.ndarray, X: np.ndarray, n_keys: int) -> tuple[np.ndarray
     with np.errstate(invalid="ignore", divide="ignore"):
         mean = np.where(counts[:, None] > 0, sums / counts[:, None], 0.0)
     return mean.astype(np.float32), counts
+
+
+def _concat_release(parts: list, axis: int = 0, dtype=None) -> np.ndarray:
+    """Concatenate while freeing each part as it is copied, so peak memory
+    stays near one copy (k >= 2 graphs are several GB)."""
+    if not parts:
+        raise ValueError("nothing to concatenate")
+    dtype = dtype or parts[0].dtype
+    total = sum(p.shape[axis] for p in parts)
+    shape = list(parts[0].shape)
+    shape[axis] = total
+    out = np.empty(shape, dtype=dtype)
+    pos = 0
+    for i in range(len(parts)):
+        n = parts[i].shape[axis]
+        if axis == 0:
+            out[pos:pos + n] = parts[i]
+        else:
+            out[:, pos:pos + n] = parts[i]
+        pos += n
+        parts[i] = None
+    return out
 
 
 class WindowBuilder:
@@ -241,9 +264,9 @@ class WindowBuilder:
                         eattr = np.zeros((0, self.E + 1), np.float32)
                     nf = np.stack([node_mean(x, lo, t) for x in nodes])
                     center_feat[i] = nf[0]
-                    g_nodes.append(nf)
+                    g_nodes.append(nf.astype(np.float16) if cfg.float16 else nf)
                     g_edges.append(ei)
-                    g_eattr.append(eattr)
+                    g_eattr.append(eattr.astype(np.float16) if cfg.float16 else eattr)
                     node_ptr.append(node_ptr[-1] + len(nodes))
                     edge_ptr.append(edge_ptr[-1] + ei.shape[1])
 
@@ -285,13 +308,14 @@ class WindowBuilder:
         })
         windows[["segment_id", "split"]] = windows["group"].str.split("|", expand=True)
         windows = windows.drop(columns="group")
+        store = np.float16 if cfg.float16 else np.float32
         return {
             "windows": windows,
             "seq_idx": seq_idx,
             "center_feat": center_feat,
-            "ego": {"node_feat": np.concatenate(g_nodes).astype(np.float32),
-                    "edge_index": np.concatenate(g_edges, axis=1).astype(np.int64),
-                    "edge_attr": np.concatenate(g_eattr).astype(np.float32),
+            "ego": {"node_feat": _concat_release(g_nodes, dtype=store),
+                    "edge_index": _concat_release(g_edges, axis=1, dtype=np.int64),
+                    "edge_attr": _concat_release(g_eattr, dtype=store),
                     "node_ptr": node_ptr, "edge_ptr": np.asarray(edge_ptr, np.int64)},
             "activity": {"own": own_pat, "others": oth_pat, "others_mask": oth_mask},
             "devices": list(self.devices),

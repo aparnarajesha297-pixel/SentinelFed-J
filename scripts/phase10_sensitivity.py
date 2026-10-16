@@ -389,7 +389,8 @@ def report(res):
     for study, df, key in [("window", win, "w"), ("hop", hop, "k")]:
         if df["setting"].nunique() < 1:
             continue
-        df = df.assign(v=df["setting"].str[1:].astype(int)).sort_values("v")
+        df = df.assign(v=df["setting"].str.extract(r"(\d+)")[0].astype(int),
+                       f16=df["setting"].str.endswith("f16")).sort_values(["v", "f16"])
         order = list(dict.fromkeys(df["setting"]))
         g = df.groupby("setting")
         for st in order:
@@ -410,7 +411,7 @@ def report(res):
                       "Scoring latency (ms per window)", "Window size w (one-second slots)")
         else:
             two_panel(res / "sensitivity_hop.png", "Hop length k: accuracy and graph-building cost",
-                      [s[1:] for s in order], mm.values, sm.values, "Attack-type macro-F1",
+                      [s[1:].replace("f16", "\n(fp16)") for s in order], mm.values, sm.values, "Attack-type macro-F1",
                       g["build_seconds"].mean().reindex(order).values,
                       "Phase 4 build time (s, all windows)", "Hop length k")
     cl = r[r.study == "classifier"]

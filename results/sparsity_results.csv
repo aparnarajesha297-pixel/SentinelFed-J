@@ -1,0 +1,4 @@
+Training history,F1,Attack-type macro-F1,Train windows,Near-empty window share,seeds
+full training period,0.9989 ± 0.0001,0.9542 ± 0.0015,290175.0,0.39942103902817266,3
+latest 25% of training period,0.9985 ± 0.0001,0.9423 ± 0.0070,78273.0,0.42128192352407606,3
+latest 50% of training period,0.9989 ± 0.0000,0.9485 ± 0.0027,145448.0,0.4009474176337935,3
