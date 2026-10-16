@@ -58,13 +58,19 @@ def main() -> None:
     res = Path(args.results)
     files = sorted(glob.glob(f"{args.scores}/test_scores_seed*.npz"))
     trivial = np.load(f"{args.scores}/trivial_baselines.npz")
+    seedwise = pd.read_csv(res / "experiment1_seedwise_protocol_blind.csv")
     rows, boot_rows = [], []
 
     for f in files:
         z = np.load(f)
         seed = int(Path(f).stem.split("seed")[1])
         y, ym = z["y"], z["y_multi"]
-        thr = json.loads(str(z["thresholds"]))
+        # Thresholds per model for this seed; the deterministic trivial
+        # baselines were run once (first seed), so fall back to that row.
+        thr = {}
+        for model, g in seedwise.groupby("Model"):
+            row = g[g["seed"] == seed]
+            thr[model] = float((row if len(row) else g).iloc[0]["threshold"])
         tree_name = next(k for k in thr if k.startswith("Depth-1"))
         binary = {
             REF: z["risk"] >= thr[REF],
