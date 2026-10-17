@@ -25,6 +25,7 @@ from .train import (LCClassifier, SupervisedHead, class_weights, collate, head_i
                     lc_batches, predict_head, predict_lc)
 
 METHODS = ("isolated", "fedavg", "fedprox", "reputation")
+ROBUST = ("median", "krum")
 
 
 # ---------------------------------------------------------------- site split
@@ -72,13 +73,41 @@ def _shared(state, prefix):
     return {k: v for k, v in state.items() if k.startswith(prefix)}
 
 
-def aggregate(method, sites, shared_states, global_state, rep_beta=0.8, rep_floor=0.05):
+def _flat(state, keys):
+    return torch.cat([state[k].flatten().float() for k in keys])
+
+
+def _unflat(vec, like, keys):
+    out, pos = {}, 0
+    for k in keys:
+        n = like[k].numel()
+        out[k] = vec[pos:pos + n].view_as(like[k]).to(like[k].dtype)
+        pos += n
+    return out
+
+
+def aggregate(method, sites, shared_states, global_state, rep_beta=0.8, rep_floor=0.05, krum_f=2):
     """Return the new shared state (or None for isolated training)."""
     if method == "isolated":
         return None
     sizes = [s.n_train for s in sites]
     if method in ("fedavg", "fedprox"):
         return fedavg(shared_states, sizes)
+    keys = [k for k in global_state if torch.is_floating_point(global_state[k])]
+    if method == "median":                      # coordinate-wise median of the submitted models
+        med = torch.stack([_flat(st, keys) for st in shared_states]).median(0).values
+        out = _unflat(med, global_state, keys)
+        out.update({k: v.clone() for k, v in global_state.items() if k not in out})
+        return out
+    if method == "krum":                        # Blanchard et al. 2017: keep the single update
+        deltas = torch.stack([_flat(st, keys) - _flat(global_state, keys) for st in shared_states])
+        n = len(deltas)
+        m = max(1, n - krum_f - 2)
+        d2 = torch.cdist(deltas, deltas) ** 2
+        scores = torch.stack([d2[i][torch.arange(n) != i].sort().values[:m].sum() for i in range(n)])
+        best = int(scores.argmin())
+        out = {k: v.clone() for k, v in shared_states[best].items()}
+        return out
     # reputation-weighted: similarity of each site's update to the
     # coordinate-wise median update, smoothed over rounds; weight =
     # reputation x data size; a site's reputation never drops below the floor.
@@ -103,8 +132,15 @@ def n_params(state):
 
 
 # ---------------------------------------------------------------- training
+def poison(state, global_state, scale):
+    """Model poisoning: submit the local update flipped and scaled by -scale."""
+    return {k: (global_state[k] - scale * (v - global_state[k])) if torch.is_floating_point(v) else v
+            for k, v in state.items()}
+
+
 def run_federated(data, method, seed, n_sites=6, rounds_a=3, pre_rounds=2, rounds_b=6,
-                  local_epochs=1, mu=0.01, batch=1024, lr=1e-3, log=print):
+                  local_epochs=1, mu=0.01, batch=1024, lr=1e-3, log=print,
+                  malicious=(), attack_scale=0.0):
     torch.manual_seed(seed)
     rng = np.random.default_rng(seed)
     n_cls = len(data.classes)
@@ -148,7 +184,8 @@ def run_federated(data, method, seed, n_sites=6, rounds_a=3, pre_rounds=2, round
                     opt.zero_grad()
                     loss.backward()
                     opt.step()
-            states.append(_shared(model.state_dict(), "lc."))
+            st = _shared(model.state_dict(), "lc.")
+            states.append(poison(st, global_lc, attack_scale) if s.k in malicious else st)
         new = aggregate(method, sites, states, global_lc)
         if new is not None:
             global_lc = new
@@ -205,6 +242,8 @@ def run_federated(data, method, seed, n_sites=6, rounds_a=3, pre_rounds=2, round
                                         ("supervised", rounds_b, True)):
         for r in range(n_rounds):
             states = [local_round(s, supervised) for s in sites]
+            states = [poison(st, global_ce, attack_scale) if s.k in malicious else st
+                      for s, st in zip(sites, states)]
             new = aggregate(method, sites, states, global_ce)
             if new is not None:
                 global_ce = new
