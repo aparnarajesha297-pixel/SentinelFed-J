@@ -1,0 +1,38 @@
+{
+  "code_version": "8327a2c551c4c5887d755585b72ca5bfe6c4051a",
+  "code_dirty": false,
+  "data_version": {
+    "raw_csv_sha256": "1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7",
+    "processed": {
+      "processed_data.csv_sha256": "2d640aa4be061e128dbf71411a355467c8cdee65e21c383586a863fea4ee5bf0",
+      "rows": 2096419
+    }
+  },
+  "split_cut_points": "results/split_cutpoints.csv",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "gpu": false
+  },
+  "software": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "torch_geometric": "2.8.1",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "sizes": [
+    10,
+    50,
+    100,
+    200,
+    500
+  ],
+  "slice_seconds": 120,
+  "brokers": "ceil(N/10)",
+  "threads": 1,
+  "traffic": "replayed normal sensor<->broker traffic, test split, recording 0-0",
+  "latency_definition": "per 1 s slot: graph-construction share + LC/head scoring of that slot's windows",
+  "model": "Phase 5 trained LC + head (weights do not affect timing)"
+}

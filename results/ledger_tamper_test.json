@@ -1,0 +1,8 @@
+{
+  "tampered_seq": 21936,
+  "original_decision": "Trust",
+  "new_decision": "Reject",
+  "chain_breaks_at": 21936,
+  "detected": true,
+  "verify_seconds_full_chain": 0.20054967499891063
+}

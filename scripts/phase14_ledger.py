@@ -91,13 +91,63 @@ def verify(con):
     return None
 
 
+def plot(res):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    t = pd.read_csv(res / "ledger_results.csv")
+    tamper = json.loads((res / "ledger_tamper_test.json").read_text())
+    names = ["No ledger", "Conventional database log", "Hash-chained ledger"]
+    t = t.set_index("Logging method").reindex(names)
+    colors = ["#c3c2b7", "#2a78d6", "#1baf7a"]
+    fig, axes = plt.subplots(1, 3, figsize=(11, 3.6), dpi=150)
+    for ax, col, lab in [(axes[0], "Latency / record (ms)", "Latency per record (ms)"),
+                         (axes[1], "Storage / record (bytes)", "Storage per record (bytes)")]:
+        ax.barh(range(3), t[col], color=colors, height=0.55)
+        for i, v in enumerate(t[col]):
+            ax.text(v, i, f" {v:.3f}" if v < 10 else f" {v:.0f}", va="center", fontsize=8, color="#0b0b0b")
+        ax.set_yticks(range(3), ["No ledger", "Database log", "Hash chain"] if ax is axes[0] else [""] * 3)
+        ax.invert_yaxis()
+        ax.set_xlabel(lab)
+        ax.set_xlim(0, t[col].max() * 1.35)
+    ax = axes[2]
+    ax.axis("off")
+    ok = tamper.get("detected")
+    ax.text(0, 0.92, "Tamper test", fontsize=10, fontweight="bold", color="#0b0b0b", transform=ax.transAxes)
+    lines = [f"Record {tamper.get('tampered_seq')} altered in place:",
+             f"  decision {tamper.get('original_decision')} -> {tamper.get('new_decision')}",
+             "",
+             "Database log: change goes unnoticed",
+             f"Hash chain: verification fails at record {tamper.get('chain_breaks_at')}",
+             f"  ({'detected' if ok else 'NOT detected'}; full chain checked in "
+             f"{tamper.get('verify_seconds_full_chain', 0):.2f} s)"]
+    for i, ln in enumerate(lines):
+        ax.text(0, 0.78 - i * 0.12, ln, fontsize=8.5, color="#52514e" if i in (1, 5) else "#0b0b0b",
+                transform=ax.transAxes)
+    for a in axes[:2]:
+        a.grid(axis="x", color="#e4e3df", linewidth=0.6)
+        a.set_axisbelow(True)
+        for sp in ("top", "right"):
+            a.spines[sp].set_visible(False)
+        a.tick_params(colors="#52514e")
+    fig.suptitle("Hash-chained ledger: overhead and tamper detection (every test-set decision logged)",
+                 fontsize=10, color="#0b0b0b", x=0.01, ha="left")
+    fig.tight_layout()
+    fig.savefig(res / "ledger_overhead_tamper.png")
+    plt.close(fig)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scores", default="data/phase6_protocol_blind/test_scores_seed0.npz")
     ap.add_argument("--results", default="results")
     ap.add_argument("--store", default="data/phase14")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--plot-only", action="store_true")
     args = ap.parse_args()
+    if args.plot_only:
+        plot(Path(args.results))
+        return
     res, store = Path(args.results), Path(args.store)
     store.mkdir(parents=True, exist_ok=True)
     recs, _ = records(args.scores, args.limit)
@@ -154,6 +204,7 @@ def main():
     with pd.option_context("display.width", 250, "display.max_colwidth", 70):
         print(t.round(4).to_string(index=False))
         print(json.dumps(tamper, indent=2, default=str))
+    plot(res)
 
 
 if __name__ == "__main__":

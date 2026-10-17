@@ -173,8 +173,9 @@ def report(res):
     b.set_xlabel("Devices in the network")
     b.set_ylabel("Pipeline memory above baseline (MB)")
     for ax in (a, b):
-        ax.set_xscale("log")
-        ax.set_xticks(list(x), [str(v) for v in x])
+        ax.set_xticks(list(x), [str(v) for v in x])   # linear axis: growth is close to linear
+        ax.set_xlim(0, x.max() * 1.05)
+        ax.set_ylim(bottom=0)
         ax.grid(color=GRID, linewidth=0.6)
         ax.set_axisbelow(True)
         for s in ("top", "right"):

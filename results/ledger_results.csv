@@ -1,0 +1,4 @@
+Logging method,Latency / record (ms),P99 latency (ms),Storage / record (bytes),Records / s,Tamper detected?
+No ledger,0.004447752800693331,0.009701738890726066,0.0,213507.50475870035,n/a
+Conventional database log,0.1799528394375702,0.49495719824335377,173.08883148457682,5514.638455396016,No (nothing to check the altered row against)
+Hash-chained ledger,0.20942769634011735,0.5673450102040075,316.4892873423492,4737.693380847816,"Yes (chain breaks at record 21936, the altered one)"
