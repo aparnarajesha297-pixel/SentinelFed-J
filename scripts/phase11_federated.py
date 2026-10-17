@@ -142,10 +142,11 @@ def report(res):
                markeredgecolor="white", label="Global attack-vs-normal F1")
     cen = t[t.Method == "Centralized (upper bound)"]["_f1"].iloc[0]
     a.axvline(cen, color=MUTED, linestyle="--", linewidth=1)
-    a.text(cen, len(fed) - 0.45, " centralized F1", fontsize=7.5, color=MUTED, va="bottom")
+    a.text(cen, 1.01, "centralized F1 ", fontsize=7.5, color=MUTED, va="bottom", ha="right",
+           transform=a.get_xaxis_transform())
     a.set_yticks(y, fed["Method"], fontsize=8.5)
     a.set_xlabel("Score on the global test set (mean ± std over seeds)")
-    a.legend(frameon=False, fontsize=7.5, loc="lower left")
+    a.legend(frameon=False, fontsize=7.5, loc="upper center", bbox_to_anchor=(0.45, -0.18), ncol=2)
     b.barh(y, fed["_mb"], color=C1, height=0.5)
     for yi, v in zip(y, fed["_mb"]):
         b.text(v, yi, f" {v:.2f} MB", va="center", fontsize=8, color=INK)

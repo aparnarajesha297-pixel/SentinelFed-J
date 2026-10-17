@@ -1,0 +1,45 @@
+{
+  "code_version": "29b8bcdb510f3c7372432247162e35f2671ba869",
+  "code_dirty": true,
+  "data_version": {
+    "raw_csv_sha256": "1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7",
+    "processed": {
+      "processed_data.csv_sha256": "2d640aa4be061e128dbf71411a355467c8cdee65e21c383586a863fea4ee5bf0",
+      "rows": 2096419
+    }
+  },
+  "split_cut_points": "results/split_cutpoints.csv",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "gpu": false
+  },
+  "software": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "torch_geometric": "2.8.1",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "sites": 6,
+  "shared": "LC and CE",
+  "local": "GC, fusion, classifier",
+  "rounds": {
+    "stage_A_LC": 3,
+    "stage_B_CE_pretraining": 2,
+    "stage_B_supervised": 6
+  },
+  "local_epochs": 1,
+  "fedprox_mu": 0.01,
+  "reputation": {
+    "beta": 0.8,
+    "floor": 0.05
+  },
+  "threshold_rule": "each site: best F1 on its own validation windows",
+  "seeds": [
+    0,
+    1,
+    2
+  ]
+}
