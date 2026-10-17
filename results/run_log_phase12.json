@@ -1,0 +1,50 @@
+{
+  "code_version": "0f69fde0b04cf4ae3d7498924802cb8d1798d2fd",
+  "code_dirty": true,
+  "data_version": {
+    "raw_csv_sha256": "1d3ef6c7cc22784a528a117f1158f5cad750273679437e18a39c360ee6b79fd7",
+    "processed": {
+      "processed_data.csv_sha256": "2d640aa4be061e128dbf71411a355467c8cdee65e21c383586a863fea4ee5bf0",
+      "rows": 2096419
+    }
+  },
+  "split_cut_points": "results/split_cutpoints.csv",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "gpu": false
+  },
+  "software": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "torch_geometric": "2.8.1",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "attack": "model poisoning: submitted LC/CE update = global - scale x (local - global)",
+  "scales": {
+    "mild": 1.0,
+    "strong": 10.0
+  },
+  "malicious_sites": {
+    "1": [
+      3
+    ],
+    "2": [
+      3,
+      4
+    ]
+  },
+  "krum_f": 2,
+  "reputation": {
+    "beta": 0.8,
+    "floor": 0.05
+  },
+  "metrics_on": "honest sites only; threshold per site from its own validation windows",
+  "seeds": [
+    0,
+    1,
+    2
+  ]
+}

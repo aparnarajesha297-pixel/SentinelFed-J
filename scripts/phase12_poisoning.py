@@ -114,7 +114,7 @@ def report(res):
     fig, (a, b) = plt.subplots(1, 2, figsize=(10.5, 4.0), dpi=150, sharey=True)
     aggs = list(AGGREGATORS.values())
     y = np.arange(len(aggs))[::-1]
-    offs = np.linspace(-0.27, 0.27, 4)
+    offs = np.linspace(0.27, -0.27, 4)       # first configuration on top, matching the legend
     for (config, _, _), off, c in zip(CONFIGS[1:], offs, SERIES):
         d = t[t["Attacker configuration"] == config].set_index("Aggregator").reindex(aggs)
         a.errorbar(d["_d"], y + off, xerr=d["_ds"], fmt="o", color=c, markersize=5, capsize=2,
@@ -131,10 +131,11 @@ def report(res):
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
         ax.tick_params(colors=MUTED)
-    a.legend(frameon=False, fontsize=7.5, loc="upper center", bbox_to_anchor=(1.05, -0.17), ncol=4)
+    handles, labels = a.get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, fontsize=8, loc="lower center", ncol=4)
     fig.suptitle("Poisoning robustness: sign-flipped updates from 1 or 2 malicious sites", fontsize=10,
                  color=INK, x=0.01, ha="left")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.07, 1, 1))
     fig.savefig(res / "poisoning_robustness.png")
     plt.close(fig)
     (res / "run_log_phase12.json").write_text(json.dumps({
